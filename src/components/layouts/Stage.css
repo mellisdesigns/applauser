@@ -1,0 +1,46 @@
+.stage__wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  height: 100vh;
+}
+
+.stage__wrapper--running {
+  background: url("https://media.giphy.com/media/l9Tllo1thElT5gvVOU/giphy.gif") center center no-repeat;
+  background-size: cover;
+}
+
+.stage__content {
+  padding: 12px;
+  margin: 10px;
+  background-color: hotpink;
+  border-radius: 5px;
+  box-shadow: inset 6px -3px 0 0 #333333, 0 6px 0 0 #333333;
+  flex-grow: 1;
+}
+
+.stage__form {
+  display: flex;
+  flex-direction: row;
+}
+
+.stage__input {
+  /* Style Border */
+  border: none;
+
+  /* Focus Border */
+  outline: none;
+
+  /* Input Styling */
+  font-size: 2rem;
+  color: #333333;
+
+  /* Padding and Size */
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.stage__button {
+
+}
