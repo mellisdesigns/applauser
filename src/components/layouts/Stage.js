@@ -1,34 +1,58 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+
+import ShowRunner from '../show-runner'
+import useCountdown from '../../hooks/countdown'
+
 import './Stage.css'
 
 const Stage = () => {
-  const [applauseState, setApplauseState] = useState('waiting')
+  const [totalTimeValue, setTotalTimeValue] = useState(5)
+  const {remainingTime, startTimer, stopTimer, resetTimer, countdownStatus} = useCountdown(totalTimeValue)
 
-  useEffect(() => {
-    switch (applauseState) {
-      case 'waiting' :
-        console.log('waiting')
-        break;
+  function handleTimerClick (time) {
+    switch(countdownStatus) {
+      case 'RUNNING' :
+        stopTimer()
+      break
 
-      case 'running' :
-        console.log('running')
-        break;
+      case 'COMPLETE' :
+        resetTimer()
+      break
 
-      case 'finished' :
-        console.log('finished')
-        break;
-      
       default :
+        startTimer(time)
+      break
     }
-  }, [applauseState])
+  }
+
+  function handleChangeEvent (event) {
+    setTotalTimeValue(event.target.value)
+  }
+
+  function buttonLabel (status) {
+    switch (countdownStatus) {
+      case 'RUNNING' :
+        return 'Stop Speech'
+      
+      case 'COMPLETE' :
+        return 'Reset Speech'
+
+      default :
+       return 'Start Speech'
+    }
+  }
 
   return (
-    <div className={`stage__wrapper ${(applauseState === 'running') ? 'stage__wrapper--running' : ''}`}>
+    <div className={`stage__wrapper ${(countdownStatus === 'RUNNING') ? 'stage__wrapper--running' : ''}`}>
       <div className="stage__content">
+        {countdownStatus === 'WAITING' ?
         <form className="stage__form" >
-          <input className="stage__input" type="number" placeholder="time in seconds"/>
-          <button type="button" className="stage__button" onClick={() => setApplauseState('running')}>Speech Time</button>
-        </form>
+          <input value={totalTimeValue} className="stage__input" type="number" placeholder="time in seconds" onChange={handleChangeEvent}/>
+          <button type="button" className="stage__button" onClick={() => handleTimerClick(totalTimeValue)}>{buttonLabel(countdownStatus)}</button>
+        </form> :
+
+        <ShowRunner remainingTime={remainingTime} countdownStatus={countdownStatus} />
+        }
       </div>
     </div>
   )

@@ -7,9 +7,10 @@
   "dependencies": {
     "normalize.css": "^8.0.1",
     "querystring": "^0.2.0",
-    "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2",
-    "react-scripts": "^2.1.2"
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1",
+    "react-scripts": "^2.1.2",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "react-scripts start",
